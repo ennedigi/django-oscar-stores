@@ -2,8 +2,9 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
-from django.contrib.gis.db.models import PointField
-from django.contrib.gis.db.models import GeoManager
+#from django.contrib.gis.db.models import PointField
+#from django.contrib.gis.db.models import GeoManager
+from djgeojson.fields import PointField
 
 from oscar.core.utils import slugify
 from oscar.apps.address.abstract_models import AbstractAddress
@@ -74,7 +75,7 @@ class Store(models.Model):
         blank=True, null=True)
     location = PointField(
         _("Location"),
-        srid=get_geodetic_srid(),
+        #srid=get_geodetic_srid(),
     )
 
     group = models.ForeignKey(
@@ -200,7 +201,7 @@ class StoreStock(models.Model):
         verbose_name_plural = _("Store stock records")
         unique_together = ("store", "product")
 
-    objects = GeoManager()
+    #objects = GeoManager()
 
     def __unicode__(self):
         if self.store and self.product:

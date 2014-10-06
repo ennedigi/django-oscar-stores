@@ -7,6 +7,11 @@ from stores import views
 
 class StoresApplication(Application):
     name = 'stores'
+    
+    default_permissions = ['is_staff', ]
+    permissions_map = {
+    }
+    
     list_view = views.StoreListView
     detail_view = views.StoreDetailView
 

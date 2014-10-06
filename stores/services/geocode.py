@@ -1,5 +1,6 @@
 import requests
-from django.contrib.gis.geos import Point
+#from django.contrib.gis.geos import Point
+from djgeojson.fields import PointField
 
 
 class ServiceError(Exception):
@@ -66,4 +67,5 @@ class GeoCodeService(object):
             raise errorcls(data['status'])
 
         location = data['results'][0]['geometry']['location']
-        return Point(location['lng'], location['lat'])
+        #return Point(location['lng'], location['lat'])
+        return PointField(location['lng'], location['lat'])

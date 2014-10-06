@@ -1,11 +1,11 @@
 from django import forms
 from django.forms import models as modelforms
 from django.db.models import Q, get_model
-from django.contrib.gis.forms import fields
+#from django.contrib.gis.forms import fields
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.gis.geoip import HAS_GEOIP
-from django.conf import settings
-
+#from django.contrib.gis.geoip import HAS_GEOIP
+from django.forms.fields import Field
+import json
 OpeningPeriod = get_model('stores', 'OpeningPeriod')
 assert OpeningPeriod
 
@@ -18,8 +18,9 @@ class StoreAddressForm(forms.ModelForm):
 
 
 class StoreForm(forms.ModelForm):
-    location = fields.GeometryField(widget=forms.HiddenInput())
-
+    #location = fields.GeometryField(widget=forms.HiddenInput())
+    location = Field(widget=forms.HiddenInput(), required=False)
+    
     class Meta:
         model = get_model('stores', 'Store')
         exclude = ('slug', 'opening_periods', )
@@ -35,12 +36,13 @@ class StoreForm(forms.ModelForm):
         # it is easier for us to use it in Javascript.
         instance = kwargs.get('instance', None)
         if instance:
-            self.initial['location'] = instance.location.geojson
-        elif HAS_GEOIP and getattr(settings, 'GEOIP_ENABLED', True):
+            self.initial['location'] = instance.location
+        '''elif HAS_GEOIP and getattr(settings, 'GEOIP_ENABLED', True):
             from django.contrib.gis.geoip import GeoIP
             point = GeoIP().geos(current_ip)
             if point:
                 self.initial['location'] = point.geojson
+        '''
 
     def clean_reference(self):
         ref = self.cleaned_data['reference']

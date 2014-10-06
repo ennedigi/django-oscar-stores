@@ -1,5 +1,6 @@
 from django import forms
-from django.contrib.gis.geos import GEOSGeometry
+#from django.contrib.gis.geos import GEOSGeometry
+from djgeojson.fields import GeometryField
 from django.db.models import get_model
 from django.utils.translation import ugettext as _
 
@@ -51,7 +52,8 @@ class StoreSearchForm(forms.Form):
         latitude = data.get('latitude', None)
         longitude = data.get('longitude', None)
         if latitude and longitude:
-            return GEOSGeometry('POINT(%s %s)' % (longitude, latitude))
+            #return GEOSGeometry('POINT(%s %s)' % (longitude, latitude))
+			return GeometryField('POINT(%s %s)' % (longitude, latitude))
 
         query = data.get('query', None)
         if query is not None:
