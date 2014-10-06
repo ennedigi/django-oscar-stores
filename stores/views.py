@@ -5,6 +5,7 @@ from django.conf import settings
 
 from stores.forms import StoreSearchForm
 from stores.utils import get_geographic_srid, get_geodetic_srid
+import json
 
 Store = get_model('stores', 'store')
 
@@ -107,3 +108,8 @@ class StoreDetailView(generic.DetailView):
     model = Store
     template_name = 'stores/detail.html'
     context_object_name = 'store'
+    def get_context_data(self, **kwargs):
+        ctx = super(StoreDetailView, self).get_context_data(**kwargs)
+        location_json = json.loads(self.object.location)
+        ctx['location'] = {'x' : location_json['coordinates'][0], 'y' : location_json['coordinates'][1] }
+        return ctx

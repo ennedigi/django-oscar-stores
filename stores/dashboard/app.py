@@ -8,7 +8,14 @@ from stores.dashboard import views
 
 class StoresDashboardApplication(Application):
     name = 'stores-dashboard'
-
+    
+    default_permissions = ['is_staff',]
+    
+    permissions_map = _map = {
+        'store-create': (['is_staff','partner.dashboard_access']),
+        'store-update': (['is_staff','partner.dashboard_access']),
+    }
+    
     store_list_view = views.StoreListView
     store_create_view = views.StoreCreateView
     store_update_view = views.StoreUpdateView
@@ -64,8 +71,8 @@ class StoresDashboardApplication(Application):
         )
         return self.post_process_urls(urlpatterns)
 
-    def get_url_decorator(self, url_name):
-        return staff_member_required
+    #def get_url_decorator(self, url_name):
+    #    return staff_member_required
 
 
 application = StoresDashboardApplication()
