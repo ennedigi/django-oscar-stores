@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-oscar-stores',
-    version="0.6.1",
+    version="0.6.1a",
     url='https://github.com/tangentlabs/django-oscar-stores',
     author="Tangent Snowball",
     author_email="oscar@tangentlabs.co.uk",
@@ -19,6 +19,9 @@ setup(
     install_requires=[
         'django-oscar>=0.5',
         'requests>=1.1',
+        'django-geojson',
+        'jsonfield',
+        'django-json-field'
     ],
     # See http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[

@@ -20,14 +20,20 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # database for testing (eg Spatialite)
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(os.path.dirname(__file__), 'db.sqlite'),
+        'ATOMIC_REQUESTS': True
+    }    
+}
+
+'''default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'oscar_stores',
         'USER': 'sample_role',
         'PASSWORD': 'sample_password',
         'HOST': '127.0.0.1',
         'PORT': 5432,
-    }
-}
+    }'''
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
