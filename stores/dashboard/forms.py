@@ -14,7 +14,8 @@ class StoreAddressForm(forms.ModelForm):
 
     class Meta:
         model = get_model('stores', 'StoreAddress')
-        exclude = ('title', 'first_name', 'last_name', 'search_text')
+        exclude = ('title', 'first_name', 'last_name', 'search_text','state', 'line3', 'line4',)
+
 
 
 class StoreForm(forms.ModelForm):
