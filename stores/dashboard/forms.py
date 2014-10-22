@@ -11,11 +11,14 @@ assert OpeningPeriod
 
 
 class StoreAddressForm(forms.ModelForm):
-
+    
+    def __init__(self, *args,**kwargs):
+        self.fields['line4'].required = True
+        self.fields['postcode'].required = True
+    
     class Meta:
         model = get_model('stores', 'StoreAddress')
-        exclude = ('title', 'first_name', 'last_name', 'search_text','state', 'line3', 'line4',)
-
+        exclude = ('title', 'first_name', 'last_name', 'search_text', 'state', 'line3')
 
 
 class StoreForm(forms.ModelForm):
