@@ -13,6 +13,7 @@ assert OpeningPeriod
 class StoreAddressForm(forms.ModelForm):
     
     def __init__(self, *args,**kwargs):
+        super(StoreAddressForm, self).__init__(**kwargs)
         self.fields['line4'].required = True
         self.fields['postcode'].required = True
     
